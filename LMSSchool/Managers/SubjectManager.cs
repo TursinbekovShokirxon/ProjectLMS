@@ -62,7 +62,7 @@ internal class SubjectManager
                         Console.Write("Enter Id :");Guid guid = Guid.Parse(Console.ReadLine() ?? "");
                         _SubjectCRUDService.Delete(guid); } break;
                 case 5: { }break;
-                default: { Console.WriteLine(""); } break;
+                default: { Console.WriteLine("You enter wrong button");  Thread.Sleep(1000); } break;
                     
             }
 

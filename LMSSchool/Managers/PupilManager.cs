@@ -17,6 +17,7 @@ internal class PupilManager
         bool davom = true;
         while (davom)
         {
+            Console.Clear();
             Console.WriteLine("PupilManager ga xush kelibsiz?");
             Console.WriteLine("1. O`quvchi qo'shish");
             Console.WriteLine("2. O`quvchilarni ko'rish");
@@ -27,17 +28,13 @@ internal class PupilManager
             Console.WriteLine("7. O`quvchini har bir fandan olgan o`rtacha  bahosi.");
             Console.WriteLine("0. Dasturdan chiqish");
             Console.Write("Tanlang: ");
-
-            int tanlov = Convert.ToInt32(Console.ReadLine());
-
-            switch (tanlov)
+            int Select = Convert.ToInt32(Console.ReadLine());
+            switch (Select)
             {
                 case 0: davom = false; break;
                 case 1:
                     Pupil PuipilCreate = new();
                     _pupilCRUDService.Create(PuipilCreate);
-                    OnObjectCreatedModel.OnObjectCreated.Invoke(PuipilCreate);
-
                     break;
                 case 2:
                     if (_pupilCRUDService.GetAll() != null)
@@ -60,7 +57,7 @@ internal class PupilManager
                         {
                             Console.WriteLine("Id : " + item.Id + " " + "Name :" + item.Name);
                         }
-                        Console.WriteLine("Enter Id where  :"); Guid Pid = Guid.Parse(Console.ReadLine()??"");
+                        Console.WriteLine("Enter Id where you want update :"); Guid Pid = Guid.Parse(Console.ReadLine()??"");
                         var p = _pupilCRUDService.GetAll().FirstOrDefault(x => x.Id == Pid);
                         _pupilCRUDService.Update(p);
                         OnObjectUpdatedModel.OnObjectUpdated.Invoke(p);
@@ -77,7 +74,8 @@ internal class PupilManager
                     OnObjectDeletedModel.OnObjectDeleted.Invoke(GuideDelete);
                     break;
                 case 5:
-                    _pupilCRUDService.TheBestPupil();
+                    if (_pupilCRUDService.GetAll() != null) { var bestPupil = _pupilCRUDService.TheBestPupil();  Console.WriteLine("Id :" + bestPupil.Id + "   Name: " + bestPupil.Name); }
+                    else new Exception("_pupil list Empty");
                     break;
                 case 6:
                     foreach (var item in _pupilCRUDService.CountOfFiveGradesForEachSubject())

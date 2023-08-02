@@ -9,14 +9,17 @@ internal class ExceptionHandler
     private readonly Exception _exception;
     SendSmsTelegramService sendSmsTelegramService = new SendSmsTelegramService();
     LogToConsoleService logToConsoleService = new LogToConsoleService();
+    OnCatchException onCatch;
     public ExceptionHandler(Exception exception)
     {
         _exception = exception;
+        onCatch += logToConsoleService.LogToConsole;
+        onCatch += sendSmsTelegramService.SendSmsTelegram;
     }
     public void Handle()
     {
-        OnCatchException onCatch = sendSmsTelegramService.SendSmsTelegram;
-        onCatch += logToConsoleService.LogToConsole;
         onCatch.Invoke(_exception.Message);
+        Console.WriteLine("Enter Any button for continue"); Console.ReadKey();
+        Program.Main();
     }
 }

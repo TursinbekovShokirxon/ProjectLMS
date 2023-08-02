@@ -2,5 +2,5 @@
 
 public interface ILogToConsoleService
 {
-    public void LogToConsole(string message);
+    public  void LogToConsole(string message);
 }
