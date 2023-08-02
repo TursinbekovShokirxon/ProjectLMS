@@ -2,5 +2,5 @@
 
 public interface IWriteToFileService
 {
-    public void WriteToFile(string filePath, string message);
+    public async void WriteToFile(string filePath,string message);
 }

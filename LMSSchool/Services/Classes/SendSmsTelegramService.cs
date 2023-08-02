@@ -2,10 +2,10 @@
 
 namespace LMSSchool.Services.Classes;
 
-internal class SendSmsTelegramService : ISendSmsTelegramService
+public class SendSmsTelegramService : ISendSmsTelegramService
 {
-    public void SendSmsTelegram(string phoneNumber, string message)
+    public void SendSmsTelegram(string message)
     {
-        throw new NotImplementedException();
+        Console.WriteLine(message +"  Shu Xabar telegramga jonatildi");
     }
 }

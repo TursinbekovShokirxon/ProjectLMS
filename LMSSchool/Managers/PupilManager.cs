@@ -7,7 +7,7 @@ namespace LMSSchool.Managers;
 
 internal class PupilManager
 {
-    private readonly IPupilCRUDService _pupilCRUDService;
+    public readonly IPupilCRUDService _pupilCRUDService; 
     public PupilManager()
     {
         _pupilCRUDService = new PupilCRUDService();
@@ -32,36 +32,72 @@ internal class PupilManager
 
             switch (tanlov)
             {
-                case 0:
-                    davom = false;
-                    break;
+                case 0: davom = false; break;
                 case 1:
+                    Pupil PuipilCreate = new();
+                    _pupilCRUDService.Create(PuipilCreate);
+                    OnObjectCreatedModel.OnObjectCreated.Invoke(PuipilCreate);
 
-                    //   _pupilCRUDService.Create();
                     break;
                 case 2:
-                    //  TaomlarniKorish();
-                    break;
+                    if (_pupilCRUDService.GetAll() != null)
+                    {
+                        foreach (var item in _pupilCRUDService.GetAll())
+                        {
+                            Console.WriteLine("Id : " + item.Id + " " + "Name :" + item.Name+" "+"Fanlari :");
+                            foreach (var item1 in item.Subjects)
+                            {
+                                Console.Write(item1+" " );
+                            }
+                        }
+                    }
+                    else continue;
+                    ; break;
                 case 3:
-                    Pupil pupil = new();
-                    _pupilCRUDService.Update(pupil);
-                    OnObjectUpdatedModel.OnObjectUpdated.Invoke(pupil);
-
+                    if (_pupilCRUDService.GetAll() != null)
+                    {
+                        foreach (var item in _pupilCRUDService.GetAll())
+                        {
+                            Console.WriteLine("Id : " + item.Id + " " + "Name :" + item.Name);
+                        }
+                        Console.WriteLine("Enter Id where  :"); Guid Pid = Guid.Parse(Console.ReadLine()??"");
+                        var p = _pupilCRUDService.GetAll().FirstOrDefault(x => x.Id == Pid);
+                        _pupilCRUDService.Update(p);
+                        OnObjectUpdatedModel.OnObjectUpdated.Invoke(p);
+                    }
+                    else { Console.WriteLine("Ozgartirishga hech narsa yoq !"); Thread.Sleep(1000); }
                     break;
                 case 4:
-                    //  TaomniOchirish();
+                    foreach (var item in _pupilCRUDService.GetAll())
+                    {
+                        Console.WriteLine("Id :"+item.Id+" Name :"+item.Name);
+                    }
+                    Console.Write("Enter Id which you want delete :");Guid GuideDelete = Guid.Parse(Console.ReadLine() ?? "");
+                    _pupilCRUDService.Delete(GuideDelete);
+                    OnObjectDeletedModel.OnObjectDeleted.Invoke(GuideDelete);
                     break;
                 case 5:
-                    //  EngQimmatOvqat();
+                    _pupilCRUDService.TheBestPupil();
                     break;
                 case 6:
-                    //  EngKopBuyurtma();
+                    foreach (var item in _pupilCRUDService.CountOfFiveGradesForEachSubject())
+                    {
+                        Console.WriteLine("name :"+item.Key );
+                        foreach (var item1 in item.Value)
+                        {
+                            Console.WriteLine("Name of Subject :"+item1.Item1 + " Count Of Five :"+item1.Item2);
+                        }
+                    }
                     break;
                 case 7:
-                    //  EngKamBuyurtma();
+                    foreach (var item in _pupilCRUDService.AvaregeGrade())
+                    {
+                        Console.WriteLine("Names :"+item.Key+" Average :"+item.Value);
+                    }
                     break;
                 default:
-                    Console.WriteLine("Noto'g'ri tanlov!");
+                    Console.WriteLine("Noto'g'ri tanlov boshqa tugma kiriting!");
+                    Thread.Sleep(1000);
                     break;
             }
 

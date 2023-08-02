@@ -1,3 +1,6 @@
 ﻿namespace LMSSchool.Events;
+public class OnCatchExceptionModel
+{
+    public delegate void OnCatchException(string a);
+}
 
-internal delegate void OnCatchException(Exception exception);

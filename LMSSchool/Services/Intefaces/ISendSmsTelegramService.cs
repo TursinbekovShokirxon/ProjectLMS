@@ -2,5 +2,5 @@
 
 internal interface ISendSmsTelegramService
 {
-    void SendSmsTelegram(string phoneNumber, string message);
+    void SendSmsTelegram(string message);
 }

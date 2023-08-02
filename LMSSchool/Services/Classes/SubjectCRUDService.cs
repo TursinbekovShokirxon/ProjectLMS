@@ -1,32 +1,38 @@
 ﻿using LMSSchool.Models;
 using LMSSchool.Services.Intefaces;
-
 namespace LMSSchool.Services.Classes;
-
 internal class SubjectCRUDService : ISubjectCRUDService
 {
+    PupilCRUDService pupilCRUDService = new();
+    private static List<Subject> subj = new();
+
+    public SubjectCRUDService()
+    {
+        subj = pupilCRUDService.GetAll()[0].Subjects;
+    }
     public void Create(Subject obj)
     {
-        throw new NotImplementedException();
+        subj.Add(obj);
     }
-
     public void Delete(Guid id)
     {
-        throw new NotImplementedException();
+        var removedSubj = subj.FirstOrDefault(p => p.Id.Equals(id));
+        if (removedSubj != null) subj.Remove(removedSubj);
+        else throw new Exception($"Id= {id} Fan topilmadi!");
     }
-
-    public IEnumerable<Subject> GetAll()
+    public List<Subject> GetAll()
     {
-        throw new NotImplementedException();
+        return subj;
     }
-
     public Subject GetById(Guid id)
     {
-        throw new NotImplementedException();
+        var SubjLikeId = subj.FirstOrDefault(p => p.Id.Equals(id));
+        if (SubjLikeId == null) throw new Exception("Not found in the list");
+        return SubjLikeId;
     }
-
     public void Update(Subject obj)
     {
-        throw new NotImplementedException();
+        int index = subj.FindIndex(x => x.Id.Equals(obj.Id));
+        subj[index] = obj;
     }
 }

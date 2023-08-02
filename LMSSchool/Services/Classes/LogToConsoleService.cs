@@ -6,6 +6,6 @@ internal class LogToConsoleService : ILogToConsoleService
 {
     public void LogToConsole(string message)
     {
-        throw new NotImplementedException();
+        Console.WriteLine(message);
     }
 }

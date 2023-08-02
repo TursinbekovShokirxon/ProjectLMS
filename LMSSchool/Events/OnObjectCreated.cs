@@ -1,3 +1,7 @@
 ﻿namespace LMSSchool.Events;
 
-internal delegate void OnObjectCreated(object obj);
+public class OnObjectCreatedModel
+{
+    public static Action<object> OnObjectCreated = (obj) =>
+    Console.WriteLine(obj.GetType().GetProperty("Name") + " object created ");
+}

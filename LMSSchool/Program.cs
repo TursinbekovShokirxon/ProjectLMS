@@ -13,7 +13,7 @@ internal class Program
             bool repeat = true;
             while (repeat)
             {
-                Console.WriteLine("Select\n1.Pupil\n2.Subject");
+                Console.WriteLine("Select\n1.Pupil\n2.Subject\n3.Exit");
                 byte select = byte.Parse(Console.ReadLine());
                 if (select == 1)
                 {
@@ -21,8 +21,18 @@ internal class Program
                 }
                 else if (select == 2)
                 {
-                    new SubjectManager().Run(); 
+                    new SubjectManager().Run();
                 }
+                else if(select==3)
+                {
+                    break;    
+                }
+                else
+                {
+                    Console.WriteLine("You enter wrong button");
+                    Thread.Sleep(1000);
+                }
+
                 Console.Clear();
             }
         }
