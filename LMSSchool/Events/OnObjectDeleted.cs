@@ -10,7 +10,6 @@ namespace LMSSchool.Events
 {
     internal class OnObjectDeletedModel
     {
-
         public static SendSmsTelegramService send = new();
         public static Action<object> OnObjectDeleted = (obj) =>
         {

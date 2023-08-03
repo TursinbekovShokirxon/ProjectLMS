@@ -1,0 +1,29 @@
+[
+  {
+    "Id": "2c6f85ab-0d7e-40ef-9402-af15d1b153d7",
+    "Name": "Javlon",
+    "Subjects": [
+      {
+        "Id": "5fcea374-4489-487d-913e-30d0f83b6540",
+        "Name": "Math",
+        "Grades": [
+          3,
+          4,
+          3,
+          3,
+          3,
+          3,
+          3,
+          4,
+          4,
+          4
+        ]
+      },
+      {
+        "Id": "4fd860cb-68ce-4949-bc7b-11f0dc04c273",
+        "Name": "English",
+        "Grades": []
+      }
+    ]
+  }
+]

@@ -33,11 +33,6 @@ internal class SubjectManager
                         foreach (var item in _SubjectCRUDService.GetAll())
                         {
                             Console.WriteLine("Name :"+item.Name+" Id :"+item.Id);
-                            Console.Write(" Grades :");
-                            foreach (var item1 in item.Grades)
-                            {
-                                Console.Write(item1+" ");
-                            }
                         }
                         Console.ReadKey();
                     }
@@ -50,8 +45,7 @@ internal class SubjectManager
                             Console.WriteLine("Name :"+item.Id+" Id :"+item.Name);
                         }
                         Console.Write("Enter Subjects Id :");Guid id=Guid.Parse(Console.ReadLine()??"");
-                        var Update = _SubjectCRUDService.GetAll().Where(x => x.Id == id);
-
+                         _SubjectCRUDService.Update(_SubjectCRUDService.GetById(id));
                     }
                     break;
                 case 4: {

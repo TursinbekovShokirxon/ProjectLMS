@@ -37,18 +37,24 @@ internal class PupilManager
                     _pupilCRUDService.Create(PuipilCreate);
                     break;
                 case 2:
-                    if (_pupilCRUDService.GetAll() != null)
+                    if (_pupilCRUDService.GetAll().Count() > 0)
                     {
                         foreach (var item in _pupilCRUDService.GetAll())
                         {
-                            Console.WriteLine("Id : " + item.Id + " " + "Name :" + item.Name+" "+"Fanlari :");
+                            Console.WriteLine("Id : " + item.Id + " " + "Name :" + item.Name + " " );
                             foreach (var item1 in item.Subjects)
                             {
-                                Console.Write(item1+" " );
+                                Console.WriteLine("Id :"+item1.Id + " Name :"+item1.Name);
+                                Console.Write("Baholari");
+                                foreach (var item2 in item1.Grades)
+                                {
+                                    Console.Write(item2+" ");
+                                }
                             }
                         }
+                        Console.ReadKey();
                     }
-                    else continue;
+                else new Exception("Pupil list is empty");
                     ; break;
                 case 3:
                     if (_pupilCRUDService.GetAll() != null)
